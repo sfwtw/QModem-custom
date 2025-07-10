@@ -83,6 +83,10 @@ connect_check = s:taboption("advanced", Flag, "connect_check", translate("V4/V6 
 connect_check.description = translate("Only for AT dial modem.")
 connect_check.default = "0"
 
+-- PDP Context Index
+define_connect = s:taboption("advanced", Value, "define_connect", translate("PDP Context Index"))
+define_connect.default = "1"
+
 -- 网络类型
 pdp_type= s:taboption("advanced", ListValue, "pdp_type", translate("PDP Type"))
 pdp_type.default = "ipv4v6"
@@ -90,7 +94,6 @@ pdp_type.rmempty = false
 pdp_type:value("ip", translate("IPv4"))
 pdp_type:value("ipv6", translate("IPv6"))
 pdp_type:value("ipv4v6", translate("IPv4/IPv6"))
-
 
 -- 接入点
 apn = s:taboption("advanced", Value, "apn", translate("APN"))

@@ -15,7 +15,7 @@ vendor_get_disabled_features()
 get_mode()
 {
     at_command='AT#USBCFG?'
-    local mode_num=$(at ${at_port} ${at_command} | grep -o "#USBCFG:" | awk -F': ' '{print $2}')
+    local mode_num=$(at ${at_port} ${at_command} | grep "#USBCFG:" | awk -F': ' '{print $2}')
     case "$mode_num" in
         "0") mode="rndis" ;;
         "1") mode="qmi" ;;

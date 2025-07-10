@@ -277,7 +277,7 @@ static char *find_firehose_mbn(char **firehose_dir, size_t size)
         }
     }
 
-    dbg_time("%s %s\n", __func__, firehose_mbn);
+    dbg_time("%s %s\n", __func__, firehose_mbn ? firehose_mbn : "");
     return firehose_mbn;
 }
 
@@ -715,7 +715,7 @@ int main(int argc, char *argv[])
     }
 
     if (!g_is2mdn_path) firehose_mbn = find_firehose_mbn(&firehose_dir, MAX_PATH);
-    dbg_time("%s %s\n", __func__, firehose_mbn);
+    dbg_time("%s %s\n", __func__, firehose_mbn ? firehose_mbn : "");
     if (!firehose_mbn)
     {
         update_transfer_bytes(-1);
