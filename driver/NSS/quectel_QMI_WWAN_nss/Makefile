@@ -16,7 +16,7 @@ define KernelPackage/qmi_wwan_q_nss
   DEPENDS:=@(TARGET_qualcommax_ipq807x||TARGET_qualcommax_ipq50xx) \
 	    +kmod-usb-net \
 	    +kmod-usb-wdm \
-	    @kmod-rmnet_nss
+	    +@kmod-rmnet-nss
   FILES:=$(PKG_BUILD_DIR)/qmi_wwan_q.ko
   AUTOLOAD:=$(call AutoLoad,81,qmi_wwan_q)
 endef
@@ -26,7 +26,7 @@ EXTRA_CFLAGS+= \
 	-Wno-missing-prototypes \
 	-Wno-missing-declarations
 
-ifneq ($(CONFIG_PACKAGE_kmod-rmnet_nss),)
+ifneq ($(CONFIG_PACKAGE_kmod-rmnet-nss),)
 EXTRA_CFLAGS += -I$(STAGING_DIR)/usr/include/qca-nss-rmnet
 EXTRA_CFLAGS += -DCONFIG_QCA_NSS_DRV
 endif

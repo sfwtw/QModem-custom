@@ -1,22 +1,23 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=rmnet_nss
+PKG_NAME:=rmnet-nss
 PKG_VERSION:=1.0
-PKG_RELEASE:=2
+PKG_RELEASE:=1
 
 include $(INCLUDE_DIR)/kernel.mk
 include $(INCLUDE_DIR)/package.mk
 
 PKG_BUILD_PARALLEL:=1
 
-define KernelPackage/rmnet_nss
+define KernelPackage/rmnet-nss
   SECTION:=kernel
   CATEGORY:=Kernel modules
   SUBMENU:=Network Devices
   TITLE:=RmNet QCA NSS support
   DEPENDS:=@(TARGET_qualcommax_ipq807x||TARGET_qualcommax_ipq50xx) \
-	    @kmod-qca-nss-drv \
-	    +@NSS_DRV_RMNET_ENABLE +@NSS_DRV_C2C_ENABLE
+	    +@kmod-qca-nss-drv \
+	    +@NSS_DRV_RMNET_ENABLE \
+	    +@NSS_DRV_C2C_ENABLE
   FILES:=$(PKG_BUILD_DIR)/rmnet_nss.ko
   AUTOLOAD:=$(call AutoLoad,42,rmnet_nss)
 endef
@@ -34,4 +35,4 @@ define Build/Compile
 		modules
 endef
 
-$(eval $(call KernelPackage,rmnet_nss))
+$(eval $(call KernelPackage,rmnet-nss))
