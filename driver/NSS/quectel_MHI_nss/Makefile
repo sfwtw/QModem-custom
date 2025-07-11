@@ -19,7 +19,7 @@ define KernelPackage/pcie_mhi_nss
   TITLE:=Kernel pcie driver for MHI device
   DEPENDS:=@(TARGET_qualcommax_ipq807x||TARGET_qualcommax_ipq50xx) \
 	    @PCI_SUPPORT \
-	   @kmod-rmnet-nss
+	   @kmod-rmnet_nss
   FILES:=$(PKG_BUILD_DIR)/pcie_mhi_nss.ko
   AUTOLOAD:=$(call AutoLoad,90,pcie_mhi_nss)
 endef
@@ -33,7 +33,7 @@ EXTRA_CFLAGS+= \
 	-Wno-missing-prototypes \
 	-Wno-missing-declarations
 
-ifneq ($(CONFIG_PACKAGE_kmod-rmnet-nss),)
+ifneq ($(CONFIG_PACKAGE_kmod-rmnet_nss),)
 EXTRA_CFLAGS += -I$(STAGING_DIR)/usr/include/qca-nss-rmnet
 EXTRA_CFLAGS += -DCONFIG_QCA_NSS_DRV
 endif
