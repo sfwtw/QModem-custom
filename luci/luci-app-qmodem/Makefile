@@ -26,7 +26,6 @@ LUCI_DEPENDS:=+luci-compat \
 		+PACKAGE_luci-app-qmodem_INCLUDE_nss-qmi-wwan:kmod-rmnet_nss \
 		+PACKAGE_luci-app-qmodem_INCLUDE_nss-qmi-wwan:kmod-qmi_wwan_q_nss \
 		+PACKAGE_luci-app-qmodem_INCLUDE_nss-qmi-wwan:kmod-pcie_mhi_nss \
-		+PACKAGE_luci-app-qmodem_INCLUDE_nss-qmi-wwan:kmod-pcie_mhi_nss \
 		+usbutils \
 		+PACKAGE_luci-app-qmodem_INCLUDE_ADD_PCI_SUPPORT:kmod-pcie_mhi \
 		+PACKAGE_luci-app-qmodem_INCLUDE_ADD_PCI_SUPPORT:pciutils \
