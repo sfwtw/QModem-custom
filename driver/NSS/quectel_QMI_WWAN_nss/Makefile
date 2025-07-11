@@ -12,11 +12,11 @@ PKG_BUILD_PARALLEL:=1
 define KernelPackage/qmi_wwan_q_nss
   SUBMENU:=WWAN Support
   TITLE:=Quectel Linux USB QMI WWAN Driver
-  DEPENDS:=+kmod-usb-net +kmod-usb-wdm
   DEPENDS:=@(TARGET_qualcommax_ipq807x||TARGET_qualcommax_ipq50xx) \
 	    +kmod-usb-net \
 	    +kmod-usb-wdm \
-	    +@kmod-rmnet-nss
+	    +kmod-rmnet-nss \
+		@PACKAGE_kmod-rmnet-nss
   FILES:=$(PKG_BUILD_DIR)/qmi_wwan_q.ko
   AUTOLOAD:=$(call AutoLoad,81,qmi_wwan_q)
 endef
