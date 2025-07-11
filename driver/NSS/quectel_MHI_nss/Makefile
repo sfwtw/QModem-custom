@@ -20,8 +20,8 @@ define KernelPackage/pcie_mhi_nss
   DEPENDS:=@(TARGET_qualcommax_ipq807x||TARGET_qualcommax_ipq50xx) \
 	    @PCI_SUPPORT \
 	   @kmod-rmnet_nss
-  FILES:=$(PKG_BUILD_DIR)/pcie_mhi_nss.ko
-  AUTOLOAD:=$(call AutoLoad,90,pcie_mhi_nss)
+  FILES:=$(PKG_BUILD_DIR)/pcie_mhi.ko
+  AUTOLOAD:=$(call AutoLoad,90,pcie_mhi)
 endef
 
 define KernelPackage/pcie_mhi_nss/description

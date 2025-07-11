@@ -17,8 +17,8 @@ define KernelPackage/qmi_wwan_q_nss
 	    +kmod-usb-net \
 	    +kmod-usb-wdm \
 	    @kmod-rmnet_nss
-  FILES:=$(PKG_BUILD_DIR)/qmi_wwan_q_nss.ko
-  AUTOLOAD:=$(call AutoLoad,81,qmi_wwan_q_nss)
+  FILES:=$(PKG_BUILD_DIR)/qmi_wwan_q.ko
+  AUTOLOAD:=$(call AutoLoad,81,qmi_wwan_q)
 endef
 
 EXTRA_CFLAGS+= \
