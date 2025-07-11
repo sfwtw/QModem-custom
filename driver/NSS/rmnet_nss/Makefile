@@ -16,8 +16,7 @@ define KernelPackage/rmnet_nss
   TITLE:=RmNet QCA NSS support
   DEPENDS:=@(TARGET_qualcommax_ipq807x||TARGET_qualcommax_ipq50xx) \
 	    @kmod-qca-nss-drv \
-	    +NSS_DRV_RMNET_ENABLE \
-	    +NSS_DRV_C2C_ENABLE
+	    +@NSS_DRV_RMNET_ENABLE +@NSS_DRV_C2C_ENABLE
   FILES:=$(PKG_BUILD_DIR)/rmnet_nss.ko
   AUTOLOAD:=$(call AutoLoad,42,rmnet_nss)
 endef
