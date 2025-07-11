@@ -83,6 +83,10 @@ connect_check = s:taboption("advanced", Flag, "connect_check", translate("V4/V6 
 connect_check.description = translate("Only for AT dial modem.")
 connect_check.default = "0"
 
+-- PDP Context Index
+define_connect = s:taboption("advanced", Value, "define_connect", translate("PDP Context Index"))
+define_connect.default = "1"
+
 -- 网络类型
 pdp_type= s:taboption("advanced", ListValue, "pdp_type", translate("PDP Type"))
 pdp_type.default = "ipv4v6"
@@ -90,7 +94,6 @@ pdp_type.rmempty = false
 pdp_type:value("ip", translate("IPv4"))
 pdp_type:value("ipv6", translate("IPv6"))
 pdp_type:value("ipv4v6", translate("IPv4/IPv6"))
-
 
 -- 接入点
 apn = s:taboption("advanced", Value, "apn", translate("APN"))
@@ -116,12 +119,6 @@ apn:value("internet.eplus.de", translate("E-Plus (DE)"))
 apn:value("A1.net", translate("A1 (AT)"))
 apn:value("drei.at", translate("Drei (AT)"))
 apn:value("internet.t-mobile.at", translate("Magenta (AT)"))
-
--- Philippines (PH)
-apn:value("http.globe.com.ph", translate("Globe Prepaid (PH)"))
-apn:value("internet.globe.com.ph", translate("Globe Postpaid (PH)"))
-apn:value("internet", translate("Smart Communications (PH)"))
-apn:value("internet.dito.ph", translate("Dito Telecomunity (PH)"))
 
 auth = s:taboption("advanced", ListValue, "auth", translate("Authentication Type"))
 auth.default = "none"
@@ -172,12 +169,6 @@ apn:value("internet.eplus.de", translate("E-Plus (DE)"))
 apn:value("A1.net", translate("A1 (AT)"))
 apn:value("drei.at", translate("Drei (AT)"))
 apn:value("internet.t-mobile.at", translate("Magenta (AT)"))
-
--- Philippines (PH)
-apn:value("http.globe.com.ph", translate("Globe Prepaid (PH)"))
-apn:value("internet.globe.com.ph", translate("Globe Postpaid (PH)"))
-apn:value("internet", translate("Smart Communications (PH)"))
-apn:value("internet.dito.ph", translate("Dito Telecomunity (PH)"))
 
 
 metric = s:taboption("advanced", Value, "metric", translate("Metric"))

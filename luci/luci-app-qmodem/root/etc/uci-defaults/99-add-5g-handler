@@ -9,6 +9,20 @@ modem_settings()
 	local board="$1"
 
 	case $board in
+	night,cpe)
+		#usb slot
+		uci set qmodem.usb0="modem-slot"
+		uci set qmodem.usb0.slot="3-1"
+		uci set qmodem.usb0.type="usb"
+		uci set qmodem.usb0.alias="usb"
+		#pcie slot
+		uci set qmodem.pcie0="modem-slot"
+		uci set qmodem.pcie0.slot="0000:01:00.0"
+		uci set qmodem.pcie0.type="pcie"
+		uci set	qmodem.pcie0.associated_usb='3-1'
+		uci set qmodem.pcie0.alias="pcie"
+		uci commit qmodem
+		;;
 	arcadyan,aw1000)
 		#usb slot
 		uci set qmodem.usb0="modem-slot"
