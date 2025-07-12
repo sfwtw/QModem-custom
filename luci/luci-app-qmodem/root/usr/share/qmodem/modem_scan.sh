@@ -474,6 +474,7 @@ set qmodem.$section_name.extend_prefix="1"
 set qmodem.$section_name.pdp_type="ipv4v6"
 set qmodem.$section_name.state="enabled"
 set qmodem.$section_name.metric=$metric
+set qmodem.$section_name.en_bridge="1"
 EOF
     fi
     uci batch <<EOF

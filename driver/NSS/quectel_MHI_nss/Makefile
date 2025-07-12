@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=pcie_mhi_nss
 PKG_VERSION:=1.3.6
-PKG_RELEASE:=3
+PKG_RELEASE:=4
 
 include $(INCLUDE_DIR)/kernel.mk
 include $(INCLUDE_DIR)/package.mk
@@ -19,8 +19,7 @@ define KernelPackage/pcie_mhi_nss
   TITLE:=Kernel pcie driver for MHI device
   DEPENDS:=@(TARGET_qualcommax_ipq807x||TARGET_qualcommax_ipq50xx) \
 	    @PCI_SUPPORT \
-	   	+kmod-rmnet-nss \
-		@PACKAGE_kmod-rmnet-nss
+	   	+kmod-rmnet-nss
   FILES:=$(PKG_BUILD_DIR)/pcie_mhi.ko
   AUTOLOAD:=$(call AutoLoad,90,pcie_mhi)
 endef

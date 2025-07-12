@@ -57,7 +57,6 @@ choice
 
   config PACKAGE_luci-app-qmodem_INCLUDE_nss-qmi-wwan
   bool "NSS QMI driver"
-  depends on PACKAGE_kmod-qca-nss-drv
 endchoice
 
 choice

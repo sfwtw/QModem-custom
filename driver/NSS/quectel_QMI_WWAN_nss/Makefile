@@ -15,8 +15,7 @@ define KernelPackage/qmi_wwan_q_nss
   DEPENDS:=@(TARGET_qualcommax_ipq807x||TARGET_qualcommax_ipq50xx) \
 	    +kmod-usb-net \
 	    +kmod-usb-wdm \
-	    +kmod-rmnet-nss \
-		@PACKAGE_kmod-rmnet-nss
+	    +kmod-rmnet-nss
   FILES:=$(PKG_BUILD_DIR)/qmi_wwan_q.ko
   AUTOLOAD:=$(call AutoLoad,81,qmi_wwan_q)
 endef

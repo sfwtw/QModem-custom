@@ -144,6 +144,7 @@ int tty_read_keyword(FILE *fdi, AT_MESSAGE_T *message, char *key_word, PROFILE_T
         if (fgets(tmp, LINE_BUF, fdi) == NULL) {
             break;
         }
+        usleep(5000);
         dbg_msg("Flushed stale data: %s", tmp);
     }
 
