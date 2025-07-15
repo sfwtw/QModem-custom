@@ -199,7 +199,7 @@ int mhi_netdev_mbin_enabled(void) { return mhi_mbim_enabled; }
 static uint __read_mostly qmap_mode = 1;
 module_param(qmap_mode, uint, S_IRUGO);
 
-static uint __read_mostly poll_weight = NAPI_POLL_WEIGHT;
+static uint __read_mostly poll_weight = 256;
 module_param(poll_weight, uint, S_IRUGO);
 
 #define MHI_NETDEV_DRIVER_NAME "mhi_netdev"
@@ -719,11 +719,8 @@ static struct sk_buff * add_qhdr_v5(struct sk_buff *skb, u8 mux_id) {
 	memset(ul_header, 0, sizeof(*ul_header));
 	ul_header->header_type = RMNET_MAP_HEADER_TYPE_CSUM_OFFLOAD;
 	if (skb->ip_summed == CHECKSUM_PARTIAL) {
-#if 0 //TODO
-		skb->ip_summed = CHECKSUM_NONE;
-		/* Ask for checksum offloading */
 		ul_header->csum_valid_required = 1;
-#endif
+		skb->ip_summed = CHECKSUM_NONE;
 	}
 
 	return skb;
@@ -1140,7 +1137,7 @@ static void rmnet_vnd_rawip_setup(struct net_device *rmnet_dev)
 	rmnet_dev->type = ARPHRD_RAWIP; // do not support moify mac, for dev_set_mac_address() need ARPHRD_ETHER
 	rmnet_dev->hard_header_len = 0;
 //for Qualcomm's SFE, do not add IFF_POINTOPOINT to type, or SFE donot work.
-	rmnet_dev->flags &= ~(IFF_BROADCAST | IFF_MULTICAST);
+	rmnet_dev->flags &= ~(IFF_POINTOPOINT | IFF_BROADCAST | IFF_MULTICAST);
 }
 
 static const struct net_device_ops rmnet_vnd_ops = {
@@ -1481,9 +1478,7 @@ static void rmnet_qmi_rx_handler(void *dev, struct sk_buff *skb_in)
 
 		if (ul_header && ul_header->header_type == RMNET_MAP_HEADER_TYPE_CSUM_OFFLOAD
 			&& ul_header->csum_valid_required) {
-#if 0 //TODO
 			qmap_skb->ip_summed = CHECKSUM_UNNECESSARY;
-#endif
 		}
 
 		if (qmap_skb->dev->type == ARPHRD_ETHER) {
@@ -1667,7 +1662,7 @@ static struct net_device * rmnet_vnd_register_device(struct mhi_netdev *pQmapDev
 
 out_free_newdev:
 	free_netdev(qmap_net);
-	return qmap_net;
+	return NULL;
 }
 
 static void  rmnet_vnd_unregister_device(struct net_device *qmap_net) {
@@ -2332,7 +2327,7 @@ static void mhi_netdev_setup(struct net_device *dev)
 	dev->type = ARPHRD_NONE;
 	dev->addr_len = 0;
 	dev->flags |= IFF_NOARP;
-	dev->flags &= ~(IFF_BROADCAST | IFF_MULTICAST); //POINTOPOINT will make SFE work wrong
+	dev->flags &= ~(IFF_POINTOPOINT | IFF_BROADCAST | IFF_MULTICAST); //POINTOPOINT will make SFE work wrong
 	dev->watchdog_timeo = WATCHDOG_TIMEOUT;
 	//on OpenWrt, if set rmnet_mhi0.1 as WAN, '/sbin/netifd' will auto create VLAN for rmnet_mhi0
 	dev->features |= (NETIF_F_VLAN_CHALLENGED | NETIF_F_GRO);
@@ -2889,7 +2884,7 @@ static int mhi_netdev_probe(struct mhi_device *mhi_dev,
 	mhi_netdev->mhi_dev = mhi_dev;
 	mhi_device_set_devdata(mhi_dev, mhi_netdev);
 
-	mhi_netdev->mru = (15*1024); ///etc/data/qnicorn_config.xml dataformat_agg_dl_size 15*1024
+	mhi_netdev->mru = (32*1024); ///etc/data/qnicorn_config.xml dataformat_agg_dl_size 15*1024
 	mhi_netdev->max_mtu = mhi_netdev->mru - (sizeof(struct rmnet_map_v5_csum_header) + sizeof(struct rmnet_map_header));
 	if (mhi_netdev->net_type == MHI_NET_MBIM) {
 		mhi_netdev->mru = ncmNTBParams.dwNtbInMaxSize;
