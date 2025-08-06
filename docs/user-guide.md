@@ -10,14 +10,14 @@ To build QModem from the source, add the custom feed to your OpenWRT build envir
 
 ```bash
 # Add the QModem feed source
-echo 'src-git modem https://github.com/sfwtw/QModem-custom.git;stw-custom' >> feeds.conf.default
+echo 'src-git qmodem https://github.com/FUjr/QModem.git;main' >> feeds.conf.default
 
 # Update and install the feed packages
-./scripts/feeds update modem
-./scripts/feeds install -a -p modem
+./scripts/feeds update qmodem
+./scripts/feeds install -a -p qmodem
 
 # (Optional) Force install to overwrite existing drivers/apps
-./scripts/feeds install -a -f -p modem
+./scripts/feeds install -a -f -p qmodem
 
 # Enter the build configuration menu
 make menuconfig

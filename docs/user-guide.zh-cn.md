@@ -10,14 +10,14 @@
 
 ```bash
 # 添加 QModem 软件源
-echo 'src-git modem https://github.com/sfwtw/QModem-custom.git;stw-custom' >> feeds.conf.default
+echo 'src-git qmodem https://github.com/FUjr/QModem.git;main' >> feeds.conf.default
 
 # 更新并安装软件源包
-./scripts/feeds update modem
-./scripts/feeds install -a -p modem
+./scripts/feeds update qmodem
+./scripts/feeds install -a -p qmodem
 
 # (可选) 强制安装以覆盖现有的驱动程序/应用
-./scripts/feeds install -a -f -p modem
+./scripts/feeds install -a -f -p qmodem
 
 # 进入构建配置菜单
 make menuconfig

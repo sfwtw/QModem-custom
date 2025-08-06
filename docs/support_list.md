@@ -9,6 +9,7 @@ mh5000-31 | hisilicon |✔ usb(ecm) | ✘
 Model | Platform | USB  | PCIe 
 --- | --- | --- | ---
 em05 | lte |✔ usb(qmi,ecm,mbim,rndis) | ✘
+em05-cn | lte |✔ usb(qmi,ecm,mbim,rndis) | ✘
 ep06 | lte |✔ usb(qmi,ecm,mbim,rndis) | ✘
 em12 | lte |✔ usb(qmi,ecm,mbim,rndis) | ✘
 em120k | lte12 |✔ usb(qmi,ecm,mbim,rndis) | ✘

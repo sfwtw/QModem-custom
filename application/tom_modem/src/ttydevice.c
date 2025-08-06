@@ -94,7 +94,7 @@ int tty_open_device(PROFILE_T *profile,FDS_T *fds)
 
     fds->tty_fd = open(profile->tty_dev, O_RDWR | O_NOCTTY | O_NONBLOCK);
     fds->fdi = fdopen(fds->tty_fd, "r");
-    if (setvbuf(fds->fdi, NULL, _IOFBF, 0))
+    if (setvbuf(fds->fdi , NULL, _IOFBF, 0))
     {
         err_msg("Error setting buffer for fdi");
         return COMM_ERROR;
@@ -114,13 +114,13 @@ int tty_open_device(PROFILE_T *profile,FDS_T *fds)
         return COMM_ERROR;
     }
 
-    if (setvbuf(fds->fdo, NULL, _IOFBF, 0))
+    if (setvbuf(fds->fdo , NULL, _IOFBF, 0))
     {
-        err_msg("Error setting buffer for fdo");
+        err_msg("Error setting buffer for fdi");
         return COMM_ERROR;
     }
 
-    if (setvbuf(fds->fdi, NULL, _IOLBF, 0))
+    if (setvbuf(fds->fdi , NULL, _IOLBF, 0))
     {
         err_msg("Error setting buffer for fdi");
         return COMM_ERROR;
@@ -243,7 +243,7 @@ int tty_write(FILE *fdo, char *input)
         return COMM_ERROR;
     }
     snprintf(cmd_line, cmd_len, "%s\r\n", input);
-    ret = tty_write_raw(fdo, cmd_line);
+    ret =  tty_write_raw(fdo, cmd_line);
     free(cmd_line);
     return ret;
 }
