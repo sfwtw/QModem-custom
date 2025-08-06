@@ -2884,7 +2884,7 @@ static int mhi_netdev_probe(struct mhi_device *mhi_dev,
 	mhi_netdev->mhi_dev = mhi_dev;
 	mhi_device_set_devdata(mhi_dev, mhi_netdev);
 
-	mhi_netdev->mru = (32*1024); ///etc/data/qnicorn_config.xml dataformat_agg_dl_size 15*1024
+	mhi_netdev->mru = (15*1024); ///etc/data/qnicorn_config.xml dataformat_agg_dl_size 15*1024
 	mhi_netdev->max_mtu = mhi_netdev->mru - (sizeof(struct rmnet_map_v5_csum_header) + sizeof(struct rmnet_map_header));
 	if (mhi_netdev->net_type == MHI_NET_MBIM) {
 		mhi_netdev->mru = ncmNTBParams.dwNtbInMaxSize;
