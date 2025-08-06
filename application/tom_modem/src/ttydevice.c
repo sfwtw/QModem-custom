@@ -140,6 +140,14 @@ int tty_read_keyword(FILE *fdi, AT_MESSAGE_T *message, char *key_word, PROFILE_T
     time_t start_time = time(NULL);
     int exitcode = TIMEOUT_WAITING_NEWLINE;
 
+    while (difftime(time(NULL), start_time) < 1) {
+        if (fgets(tmp, LINE_BUF, fdi) == NULL) {
+            break;
+        }
+        usleep(5000);
+        dbg_msg("Flushed stale data: %s", tmp);
+    }
+
     while (difftime(time(NULL), start_time) < profile->timeout) {
         memset(tmp, 0, LINE_BUF);
         if (fgets(tmp, LINE_BUF, fdi)) {

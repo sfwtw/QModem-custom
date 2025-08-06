@@ -4,3 +4,5 @@ config main 'main'
 	option try_preset_pcie "1"
 	option enable_pcie_scan '1'
 	option start_delay '0'
+	option enable_usb_scan "0"
+	option enable_pcie_scan "0"
