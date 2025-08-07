@@ -32,6 +32,9 @@ choice
 
   config PACKAGE_luci-app-qmodem_INCLUDE_generic-qmi-wwan
   bool "Generic QMI driver"
+
+  config PACKAGE_luci-app-qmodem_INCLUDE_nss-qmi-wwan
+  bool "NSS QMI driver"
 endchoice
 
 choice
@@ -50,6 +53,7 @@ endchoice
 
 	config PACKAGE_luci-app-qmodem_INCLUDE_ADD_PCI_SUPPORT
 		bool "Add PCIe Modem SUPPORT"
+		depends on !PACKAGE_luci-app-qmodem_INCLUDE_nss-qmi-wwan
 		default n
 
 	config PACKAGE_luci-app-qmodem_INCLUDE_ADD_MTK_T7XX_SUPPORT
