@@ -33,6 +33,10 @@ define Package/$(PKG_NAME)
 		+PACKAGE_luci-app-qmodem_INCLUDE_vendor-qmi-wwan:kmod-qmi_wwan_q \
 		+PACKAGE_luci-app-qmodem_INCLUDE_vendor-qmi-wwan:kmod-qmi_wwan_f \
 		+PACKAGE_luci-app-qmodem_INCLUDE_vendor-qmi-wwan:kmod-qmi_wwan_s \
+		+PACKAGE_luci-app-qmodem_INCLUDE_nss-qmi-wwan:kmod-rmnet-nss \
+		+PACKAGE_luci-app-qmodem_INCLUDE_nss-qmi-wwan:kmod-qmi_wwan_q_nss \
+		+PACKAGE_luci-app-qmodem_INCLUDE_nss-qmi-wwan:kmod-pcie_mhi_nss \
+		+PACKAGE_luci-app-qmodem_INCLUDE_nss-qmi-wwan:pciutils \
 		+PACKAGE_luci-app-qmodem_INCLUDE_ADD_PCI_SUPPORT:kmod-pcie_mhi \
 		+PACKAGE_luci-app-qmodem_INCLUDE_ADD_PCI_SUPPORT:pciutils \
 		+PACKAGE_luci-app-qmodem_INCLUDE_ADD_MTK_T7XX_SUPPORT:umbim \
