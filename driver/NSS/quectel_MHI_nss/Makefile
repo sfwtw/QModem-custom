@@ -21,7 +21,7 @@ define KernelPackage/pcie_mhi_nss
 	    @PCI_SUPPORT \
 	    +kmod-rmnet-nss
   FILES:=$(PKG_BUILD_DIR)/pcie_mhi.ko
-  AUTOLOAD:=$(call AutoLoad,90,pcie_mhi)
+# AUTOLOAD:=$(call AutoLoad,90,pcie_mhi)
 endef
 
 define KernelPackage/pcie_mhi_nss/description
@@ -38,9 +38,19 @@ EXTRA_CFLAGS += -I$(STAGING_DIR)/usr/include/qca-nss-rmnet
 EXTRA_CFLAGS += -DCONFIG_QCA_NSS_DRV
 endif
 
+define Build/Prepare
+	mkdir -p $(PKG_BUILD_DIR)
+	$(CP) ./src/* $(PKG_BUILD_DIR)/
+endef
+
 define Build/Compile
 	+$(KERNEL_MAKE) EXTRA_CFLAGS="$(EXTRA_CFLAGS)" M="$(PKG_BUILD_DIR)" \
 		modules
+endef
+
+define KernelPackage/pcie_mhi_nss/install
+	$(INSTALL_DIR) $(1)/etc/init.d
+	$(INSTALL_BIN) ./files/pcie_mhi $(1)/etc/init.d/pcie_mhi
 endef
 
 $(eval $(call KernelPackage,pcie_mhi_nss))
