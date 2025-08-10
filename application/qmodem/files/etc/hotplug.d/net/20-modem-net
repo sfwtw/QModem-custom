@@ -1,5 +1,24 @@
 #!/bin/sh
 # Copyright (C) 2024 Tom <fjrcn@outlook.com>
+setaffinity() {
+
+  local irq_name="$1" affinity="$2" occurrence="${3:-1}" bitmask
+
+  awk -v irq_name="$irq_name" -v occurrence="$occurrence" '
+    BEGIN{count=0}
+    $NF==irq_name {
+      if(++count==occurrence){
+        sub(/:$/,"",$1)
+        print $1
+      }
+  }' /proc/interrupts | while read -r irq; do
+    $enable_log && {
+      log_msg "$irq_name" "$affinity" "$occurrence" "$irq"
+    }
+    bitmask=$(cpus_to_bitmask "$affinity") && echo "$bitmask" > /proc/irq/"$irq"/smp_affinity
+  done
+}
+
 manual=$(uci -q get qmodem.main.block_auto_probe)
 [ "${manual}" -eq 1 ] && exit
 logger -t modem_hotplug "net slot: ${DEVPATH} action: ${ACTION}"
@@ -17,6 +36,21 @@ slot=$(basename "${slot_dir}")
 [ -d "/sys/bus/usb/devices/${slot}" ] && slot_type="usb"
 [ -d "/sys/bus/pci/devices/${slot}" ] && slot_type="pcie"
 [ -z "${slot_type}" ] && exit
+
+if ip link show rmnet_mhi0 >/dev/null 2>&1; then
+    echo f > "/sys/class/net/rmnet_mhi0/queues/rx-0/rps_cpus"
+    echo f > "/sys/class/net/rmnet_mhi0.1/queues/rx-0/rps_cpus"
+    setaffinity  'mhi'         3 1
+    setaffinity  'mhi'         2 2
+    setaffinity  'mhi'         2 3
+    setaffinity  'mhi'         2 4
+elif ip link show usb0 >/dev/null 2>&1; then
+    echo f > "/sys/class/net/usb0/queues/rx-0/rps_cpus"
+elif ip link show wwan0 >/dev/null 2>&1; then
+    echo f > "/sys/class/net/wwan0/queues/rx-0/rps_cpus"
+    echo f > "/sys/class/net/wwan0_1/queues/rx-0/rps_cpus"
+fi
+
 logger -t modem_hotplug "net slot: ${slot} action: ${ACTION} slot_type: ${slot_type}"
 case "${ACTION}" in
     add)
