@@ -9,6 +9,17 @@ modem_settings()
 	local board="$1"
 
 	case $board in
+	night,viomi)
+		#pcie slot
+		uci set qmodem.pcie0="modem-slot"
+		uci set qmodem.pcie0.slot="0000:01:00.0"
+		uci set qmodem.pcie0.type="pcie"
+		uci set	qmodem.pcie0.associated_usb='3-1'
+		uci set qmodem.pcie0.alias="PCIE"
+		uci set qmodem.pcie0.net_led="led_5g"
+		uci set qmodem.pcie0.sim_led="led_4g"
+		uci commit qmodem
+		;;
 	night,cpe)
 		#usb slot
 		uci set qmodem.usb0="modem-slot"

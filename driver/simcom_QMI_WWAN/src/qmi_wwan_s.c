@@ -396,7 +396,7 @@ next_desc:
 			);
 	}
 #endif
-
+	dev->rx_urb_size = 32*1024;
 err:
 	return status;
 }
