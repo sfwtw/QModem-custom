@@ -50,7 +50,7 @@
 #endif
 
 #ifdef CONFIG_PINCTRL_IPQ807x
-#define CONFIG_QCA_NSS_DRV
+// #define CONFIG_QCA_NSS_DRV
 //#define CONFIG_QCA_NSS_PACKET_FILTER
 #endif
 
@@ -2220,7 +2220,7 @@ static int qmi_wwan_bind(struct usbnet *dev, struct usb_interface *intf)
 
 			if (pQmapDev->qmap_mode) {
 				pQmapDev->qmap_version = qmap_version;
-				pQmapDev->qmap_size = qmap_size*1024;
+				pQmapDev->qmap_size = 32*1024;
 				dev->rx_urb_size = pQmapDev->qmap_size;
 				//for these modules, if send packet before qmi_start_network, or cause host PC crash, or cause modules crash
    				pQmapDev->link_state = !lte_a;
