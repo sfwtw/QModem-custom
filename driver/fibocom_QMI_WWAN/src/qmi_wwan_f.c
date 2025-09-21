@@ -47,7 +47,7 @@
 #endif
 
 #ifdef CONFIG_PINCTRL_IPQ807x
-#define CONFIG_QCA_NSS_DRV
+//#define CONFIG_QCA_NSS_DRV
 #endif
 
 #if 1//def CONFIG_QCA_NSS_DRV
@@ -1949,7 +1949,8 @@ static int qmi_wwan_bind(struct usbnet *dev, struct usb_interface *intf)
             NULL, 0, 100);
     }
 
-    dev->rx_urb_size = ETH_DATA_LEN + ETH_HLEN + 6;
+    // dev->rx_urb_size = ETH_DATA_LEN + ETH_HLEN + 6;
+    dev->rx_urb_size = 32*1024;
 
 #if defined(FIBOCOM_WWAN_QMAP)
     if (qmap_mode > FIBOCOM_WWAN_QMAP)
@@ -1988,7 +1989,7 @@ static int qmi_wwan_bind(struct usbnet *dev, struct usb_interface *intf)
 
             if (pQmapDev->qmap_mode) {
                 pQmapDev->qmap_version = 5;
-                pQmapDev->qmap_size = (dev->udev->speed >= USB_SPEED_SUPER) ? 16*1024 : 4*1024;
+                pQmapDev->qmap_size = (dev->udev->speed >= USB_SPEED_SUPER) ? 32*1024 : 4*1024;
 /*
                 switch (idProduct) {
                     case 0x0104:
