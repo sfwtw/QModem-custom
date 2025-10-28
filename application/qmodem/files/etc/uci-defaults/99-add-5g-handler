@@ -114,6 +114,18 @@ modem_settings()
 		add_usb_slot_cfg "5g_usb0" "2-1" "5g_usb0" "" "" "" "" "" "10"
 		uci commit qmodem
 		;;
+	nradio,wt9103)
+		uci set qmodem.usb0="modem-slot"
+		uci set qmodem.usb0.slot="1-1"
+		uci set qmodem.usb0.type="usb"
+		uci set qmodem.usb0.alias="ETH"
+		uci set qmodem.usb0.ethernet_5g="eth1"
+		uci set qmodem.usb0.net_led="blue:cmode5"
+		uci set qmodem.usb0.gpio="cpe-pwr"
+		uci set qmodem.usb0.gpio_up="1"
+		uci set qmodem.usb0.gpio_down="0"
+		uci commit qmodem
+		;;
 	esac
 }
 

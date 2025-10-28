@@ -440,7 +440,7 @@ add()
         uci batch << EOF
 set qmodem.$section_name.path="$modem_path"
 set qmodem.$section_name.data_interface="$slot_type"
-set qmodem.$section_name.enable_dial="1"
+set qmodem.$section_name.enable_dial="0"
 set qmodem.$section_name.soft_reboot="1"
 set qmodem.$section_name.extend_prefix="1"
 set qmodem.$section_name.pdp_type="ipv4v6"
