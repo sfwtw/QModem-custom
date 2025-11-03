@@ -38,6 +38,7 @@ boot() {
     if [ "$delay" -gt 0 ]; then
         logger "Delay QModem Boot init scan for $delay S"
         sleep $delay
+        echo 1 > /sys/bus/pci/rescan
         /usr/share/qmodem/modem_scan.sh scan >/dev/null 2>&1 &
     fi
     start

@@ -1071,6 +1071,7 @@ static struct pci_device_id mhi_pcie_device_id[] = {
 	{PCI_DEVICE(0x1eac, 0x1002)}, //EM160
 	{PCI_DEVICE(0x1eac, 0x1004)}, //RM520
 	{PCI_DEVICE(MHI_PCIE_VENDOR_ID, MHI_PCIE_DEBUG_ID)},
+	{PCI_DEVICE(0x105b, 0xe0f5)}, // 叼毛叶生专属垃圾T99W373
 	{0},
 };
 

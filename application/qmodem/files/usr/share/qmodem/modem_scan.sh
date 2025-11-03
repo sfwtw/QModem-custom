@@ -352,6 +352,7 @@ get_modem_model()
     cgmm_1=$(at $at_port "AT+CGMM?")
     sleep 1
     gmm=$(at $at_port "AT+GMM")
+    ati=$(at $at_port "ATI")
     name_1=$(echo -e "$cgmm" |grep "+CGMM: " | awk -F': ' '{print $2}')
     name_2=$(echo -e "$cgmm_1" |grep "+CGMM: " | awk -F'"' '{print $2} '| cut -d ' ' -f 1)
     name_3=$(echo -e "$cgmm" | sed -n '2p')
@@ -359,6 +360,7 @@ get_modem_model()
     name_5=$(echo -e "$cgmm" |grep "+CGMM: " | awk -F'"' '{print $2} '| cut -d ' ' -f 1)
     name_6=$(echo -e "$gmm" | sed -n '2p')
     name_7=$(echo -e "$gmm" | sed -n '3p')
+    name_8=$(echo -e "$ati" | grep "Model:" | awk -F': ' '{print $2}' | tr -d '\r')
     modem_name=""
 
     [ -n "$name_1" ] && match_config "$name_1"
@@ -368,6 +370,7 @@ get_modem_model()
     [ -n "$name_5" ] && [ -z "$modem_name" ] && match_config "$name_5"
     [ -n "$name_6" ] && [ -z "$modem_name" ] && match_config "$name_6"
     [ -n "$name_7" ] && [ -z "$modem_name" ] && match_config "$name_7"
+    [ -n "$name_8" ] && [ -z "$modem_name" ] && match_config "$name_8"
     [ -z "$modem_name" ] && return 1
     return 0
 }
@@ -447,10 +450,10 @@ add()
 set qmodem.$section_name.path="$modem_path"
 set qmodem.$section_name.data_interface="$slot_type"
 set qmodem.$section_name.enable_dial="1"
-set qmodem.$section_name.soft_reboot="1"
 set qmodem.$section_name.extend_prefix="1"
-set qmodem.$section_name.pdp_type="ipv4v6"
+set qmodem.$section_name.pdp_type="ipv4"
 set qmodem.$section_name.state="enabled"
+set qmodem.$section_name.use_ubus="1"
 set qmodem.$section_name.metric=$metric
 EOF
     fi

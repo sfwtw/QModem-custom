@@ -352,8 +352,8 @@ base_info()
     at_command="AT+CGMI"
     manufacturer=$(at $at_port $at_command | sed -n '2p' | sed 's/\r//g')
     #Revision（固件版本）
-    at_command="ATI"
-    revision=$(at $at_port $at_command | grep "Revision:" | sed 's/Revision: //g' | sed 's/\r//g')
+    at_command="AT+QGMR"
+    revision=$(at $at_port $at_command | sed -n '2p' | sed 's/\r//g')
     # at_command="AT+CGMR"
     # revision=$(at $at_port $at_command | sed -n '2p' | sed 's/\r//g')
     class="Base Information"
